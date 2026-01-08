@@ -1,10 +1,14 @@
-from flask import Flask, render_template, request
-import numpy as np
+import os
 import joblib
+from flask import Flask, render_template, request
+import numpy as np  
 
 app = Flask(__name__)
 
-model = joblib.load("../models/mnist_sgd_model.joblib")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "mnist_sgd_model.joblib")
+
+model = joblib.load(MODEL_PATH)
 
 @app.route("/")
 def home():
